@@ -1,4 +1,4 @@
-package nz.co.transpower.es.integration.democamelwithprometheus;
+package nz.co.transpower.es.integration.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
