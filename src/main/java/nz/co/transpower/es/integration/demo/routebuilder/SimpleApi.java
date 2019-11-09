@@ -9,17 +9,27 @@ public class SimpleApi extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().component("restlet").host("localhost").port(8181);
 
+        //@formatter:off
         rest("/say")
-                .get("/hello").to("direct:hello");
-        from("direct:hello").routeId("say/hello-backend")
-                .transform().constant("Hello World");
+                .get("/good")
+                .route().routeId("good-route")
+                .choice()
+                    .when(header("to-fail"))
+                        .throwException(new Exception("failure test"))
+                    .endChoice()
+                    .otherwise()
+                        .transform()
+                        .constant("Hello World")
+                    .endChoice()
+                .end()
+        ;
+        //@formatter:on
+
 
         rest("/say")
-                .get("/bye").to("direct:bye");
-        from("direct:bye").routeId("say/bye-backend")
-                .transform().constant("Bye World");
-
-        rest("/say")
-                .post("/bye").consumes("application/json").to("mock:update");
+                .get("/bad")
+                .consumes("application/json")
+                .route().routeId("bad-route")
+                .throwException(new Exception("exception test"));
     }
 }

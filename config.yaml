@@ -7,8 +7,8 @@
 startDelaySecs: 5
 ssl: false
 blacklistObjectNames: ["java.lang:*"]
-#rules:
-#   #Context level
+rules:
+  #Context level
 #  - pattern: 'org.apache.camel<context=([^,]+), type=context, name="([^"]+)"><>ExchangesCompleted'
 #    name: org.apache.camel.ExchangesCompleted
 #    help: Exchanges Completed
@@ -116,15 +116,25 @@ blacklistObjectNames: ["java.lang:*"]
 #    type: GAUGE
 #
 #
-#  # Route level
-#  - pattern: 'org.apache.camel<context=([^,]+), type=context, name="([^"]+)"><>LastExchangeCompletedTimestamp'
-#    name: org.apache.camel.LastExchangeCompletedTimestamp
-#    help: Exchanges Last Completed Timestamps
-#    type: UNTYPED
-#    labels:
-#      context: $1
-##      route: $2
-#      type: context
+  # Route level
+  - pattern: 'org.apache.camel<context=([^,]+), type=routes, name="([^"]+)"><>LastExchangeCompletedTimestamp'
+    name: org.apache.camel.LastExchangeCompletedTimestamp
+    help: Exchanges Last Completed Timestamps
+    type: UNTYPED
+    labels:
+      context: $1
+      route: $2
+      type: routes
+
+  - pattern: 'org.apache.camel<context=([^,]+), type=routes, name="([^"]+)"><>LastExchangeFailureTimestamp'
+    name: org.apache.camel.LastExchangeFailureTimestamp
+    help: Exchanges Last Failure Timestamps
+    type: UNTYPED
+    labels:
+      context: $1
+      route: $2
+      type: routes
+
 #  - pattern: 'org.apache.camel<context=([^,]+), type=routes, name="([^"]+)"><>ExchangesCompleted'
 #    name: org.apache.camel.ExchangesCompleted
 #    help: Exchanges Completed

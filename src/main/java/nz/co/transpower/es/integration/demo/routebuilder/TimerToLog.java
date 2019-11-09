@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class TimerToLog extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("timer:myTimer?period=60000")
-                .routeId(this.getClass().getSimpleName())
+        from("timer:myTimer?period=20000")
+                .routeId("scheduled-route")
                 .log("route triggered ${date:now:yyyy-MM-dd'T'hh:mm:ss}");
     }
 }
