@@ -17,4 +17,6 @@ Debug jmx-exporter:
 java -Djava.util.logging.config.file=logging.properties -cp collector/target/collector-0.12.3-SNAPSHOT.jar  io.prometheus.jmx.JmxScraper  service:jmx:rmi://localhost:8999/jndi/rmi://localhost:8999/jmxrmi
 
 Run springboot app with jmx-exporter as agent:
--Dorg.apache.camel.jmx.loadStatisticsEnabled=true -javaagent:/Users/jackychen/src/jmx_exporter/jmx_prometheus_javaagent/target/jmx_prometheus_javaagent-0.12.3-SNAPSHOT.jar=localhost:9191:/Users/jackychen/src/demo-camel-with-prometheus/config.yaml
+```shell
+java -Dorg.apache.camel.jmx.loadStatisticsEnabled=true -javaagent:/home/chenja/src/oss/jmx_exporter/jmx_prometheus_javaagent/target/jmx_prometheus_javaagent-0.16.2-SNAPSHOT.jar=9191:/home/chenja/src/mystuff/demo-camel-with-prometheus/config.yaml -jar demo-camel-with-prometheus-0.0.1-SNAPSHOT.jar
+```
